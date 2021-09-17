@@ -1,0 +1,18 @@
+@charset "utf-8";
+
+.esp-header__logout > .material-icons {
+  color: #f55;
+}
+
+
+.esp-header__iam--name {
+  color: #fff !important;
+}
+
+.esp-header__iam--name > .material-icons {
+  color: #07B;
+}
+
+.esp-gnb {
+  background-color: #05B;
+}

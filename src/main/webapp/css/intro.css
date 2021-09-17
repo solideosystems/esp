@@ -1,0 +1,260 @@
+@charset "utf-8";
+
+body {
+  background-color: #484848;
+}
+
+.esp-header {
+  align-items: center;
+  color: #fff;
+  font-weight: 700;
+  display: flex;
+  height: 50px;
+  justify-content: flex-end;
+}
+
+.esp-header__title {
+  justify-self: flex-start;
+  flex-grow: 1;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-indent: 60px;
+}
+
+.esp-header__timer,
+.esp-header__iam {
+  border-right: 1px solid #aaa;
+  padding: 0 16px;
+}
+
+.esp-header__iam--name {
+  background: no-repeat 0 50%;
+}
+
+.esp-header__iam--name > .material-icons {
+  font-size: 1.2rem;
+}
+
+.esp-header__logout {
+  background: transparent no-repeat 50% 50%;
+  border: 0;
+  cursor: pointer;
+  margin-right: 24px;
+  min-height: 100%;
+  width: 50px;
+}
+
+.esp-header__logout > .material-icons {
+  font-size: 1.4rem;
+}
+
+
+.esp-container {
+  display: flex;
+  height: calc(100% - 50px);
+  min-width: 100%;
+}
+
+.esp-fnb {
+  background-color: #484848;
+  flex-basis: 60px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 60px;
+  z-index: 1;
+}
+
+.esp-fnb--item {
+  background: no-repeat 50% 50%;
+  border-bottom: 1px solid #333;
+  box-shadow: 0 1px 0 #555;
+  color: #fff;
+  cursor: pointer;
+  height: 60px;
+  position: relative;
+  text-align: center;
+}
+
+.esp-fnb--item > .material-icons {
+  font-size: 1.5rem;
+  line-height: 60px;
+}
+
+
+.esp-fnb--active {
+  background-color: #444;
+}
+
+.esp-fnb--active::after {
+  border-top: 6px solid transparent;
+  border-right: 6px solid #09D;
+  border-bottom: 6px solid transparent;
+  content: "";
+  position: absolute;
+  right: -1px;
+  top: calc(50% - 5px);
+}
+
+
+.esp-gnb {
+  border: 1px solid #05B;
+  flex-basis: 250px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  margin-right: 4px;
+  transition: all .4s;
+}
+
+.esp-gnb ul {
+  display: none;
+  margin: 0;
+  padding: 0;
+}
+
+.esp-gnb__menu {
+  background-color: #09D;
+  color: #fff;
+  overflow: hidden;
+  min-height: 100%;
+}
+
+.esp-gnb__menu > ul {
+  display: block;
+}
+
+.esp-gnb__menu li > a {
+  color: #fff;
+  display: block;
+  font-weight: 700;
+  padding: 0 16px;
+  text-decoration: none;
+}
+
+/* 1 depth */
+.esp-gnb__menu > ul > li > a {
+  background-color: rgba(0, 200, 255, .4);
+  border-top: 1px dashed #08d;
+  box-shadow: 0 2px 4px #06c;
+  font-size: 1rem;
+  height: 40px;
+  line-height: 36px;
+}
+
+/* 2 depth */
+.esp-gnb__menu > ul > li > ul > li > a {
+  background-color: rgba(0, 200, 255, .2);
+  box-shadow: 0 1px 2px #28D;
+  font-size: .9rem;
+  height: 35px;
+  line-height: 35px;
+}
+
+.esp-gnb__menu > ul > li > ul > li > a::before {
+  content: "\00B7";
+  font-size: 20px;
+  padding-right: 8px;
+  vertical-align: middle;
+}
+
+/* 3 depth */
+.esp-gnb__menu > ul > li > ul > li > ul > li > a {
+  font-size: .8rem;
+  height: 28px;
+  line-height: 28px;
+  padding-left: 24px;
+}
+
+.esp-gnb__menu > ul > li > ul > li > ul > li > a::before {
+  content: "-";
+  padding-right: 8px;
+  vertical-align: middle;
+}
+
+.esp-gnb__menu--active > a,
+.esp-gnb__menu > ul > li > ul > li > ul > li > a:hover {
+  background-color: rgba(0, 129, 165, .3);
+  color: rgb(200 255 255);
+  font-weight: 700;
+}
+
+
+.esp-main {
+  background-color: #f7f7f7;
+  flex-basis: auto;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.esp-main--header {
+  align-items: center;
+  background-color: #FFF;
+  border-bottom: 1px solid #EEE;
+  display: flex;
+  height: 40px;
+}
+
+.esp-main__title {
+  border-left: 5px solid #07B;
+  color: #07B;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 100%;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-left: 24px;
+  min-width: 100px;
+  overflow: hidden;
+  padding-left: 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.esp-main__paths {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: auto;
+  list-style: none;
+  margin: 0 8px;
+  padding: 0;
+}
+
+.esp-main__paths > li {
+  color: #777;
+  display: inline-block;
+}
+
+.esp-main__paths > li::after {
+  color: #AAA;
+  font-family: "Material Icons";
+  font-size: 1.4rem;
+  content: "\e5cc";
+  vertical-align: middle;
+}
+
+.esp-main__paths > li:last-child {
+  color: #222;
+  font-weight: 700;
+}
+
+.esp-main__paths > li:last-child::after {
+  content: none;
+}
+
+.esp-main__bookmark {
+  background-color: transparent;
+  border: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: auto;
+  margin: 0 24px 0 8px;
+}
+
+.esp-app {
+  height: calc(100% - 40px);
+  overflow: auto;
+}
+
+.esp-app iframe {
+  border: 0;
+  height: calc(100% - 5px);
+}

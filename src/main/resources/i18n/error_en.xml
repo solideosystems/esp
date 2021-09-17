@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+  <entry key="error">Occurred error.</entry>
+  <entry key="error.input">Invalid input {0} value.</entry>
+
+  <!--
+  Exceptions
+  -->
+  <entry key="java.lang.Throwable">Occurred error.</entry>
+  <entry key="org.springframework.security.access.AccessDeniedException">You do not have the authorityHierarchy.</entry>
+  <entry key="org.springframework.dao.DataAccessException">Occurred error during the database processing.</entry>
+  <entry key="org.springframework.dao.DuplicateKeyException">Already exists key.</entry>
+
+  <!--
+  jsr303
+  -->
+  <entry key="javax.validation.constraints.Email.message">Invalid email formation.</entry>
+</properties>

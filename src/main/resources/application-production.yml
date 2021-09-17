@@ -1,0 +1,21 @@
+spring:
+
+  sql:
+    init:
+      mode: never
+
+# 운영 DB
+#  datasource:
+#    driver-class-name: "org.h2.Driver"
+#    url: "jdbc:h2:./esp;AUTO_SERVER=TRUE;MODE=Oracle"
+#    username: "sa"
+#    password: "11"
+
+  mvc:
+    view:
+      prefix: "/WEB-INF/pages/"
+      suffix: ".jsp"
+
+# 운영 NAS or 저장경로
+file.storage:
+  path: ./file-storage

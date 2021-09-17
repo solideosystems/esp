@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="esp.admin.system.scarecrow.service.__Dao">
+
+  <select id="select" resultType="__VO"><![CDATA[ /* {daoClass}.select */
+    SELECT
+      FROM TABLE
+     WHERE
+    ]]></select>
+
+  <insert id="insert"><![CDATA[
+    INSERT TABLE /* {daoClass}.insert */
+      INTO ()
+    VALUES ( #{_.username},
+             CURRENT_TIMESTAMP,
+             #{_.username},
+             CURRENT_TIMESTAMP)
+    ]]>
+  </insert>
+
+  <update id="update"><![CDATA[
+    UPDATE TABLE /* {daoClass}.update */
+       SET COLUMNS
+           UPDATER = #{_.username},
+           UPDATED = CURRENT_TIMESTAMP
+     WHERE
+    ]]></update>
+
+  <delete id="delete"><![CDATA[
+    UPDATE TABLE /* {daoClass}.delete */
+       SET REMOVAL = 'Y',
+           UPDATER = #{_.username},
+           UPDATED = CURRENT_TIMESTAMP
+     WHERE
+    ]]></delete>
+
+</mapper>

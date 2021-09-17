@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="esp.admin.system.user.service.UserDao">
+
+  <select id="getAllUsers" resultType="ESPUser"><![CDATA[
+    SELECT U.ID,
+           U.USERNAME,
+           U.PASSWORD_EXPIRED,
+           U.EMAIL,
+           U.NAME,
+           U.DEPT,
+           U.GRADE,
+           U.USE,
+           U.HIRED,
+           U.REMOVAL,
+           T.ID   AS TEAM_ID,
+           T.NAME AS TEAM_NAME
+    FROM USR U
+           LEFT OUTER JOIN TEAM T ON U.TEAM_ID = T.ID
+    WHERE U.USERNAME LIKE '%' || #{username} || '%'
+      AND U.NAME LIKE '%' || #{name} || '%'
+    ORDER BY U.CREATED DESC
+    ]]></select>
+
+  <select id="getUserBy" resultType="ESPUser"><![CDATA[
+    SELECT ID,
+           USERNAME,
+           PASSWORD,
+           PASSWORD_EXPIRED,
+           EMAIL,
+           NAME,
+           USE,
+           REMOVAL
+    FROM USR
+    WHERE ID = #{id}
+    ]]></select>
+
+  <insert id="add">
+    <selectKey keyProperty="id" resultType="long" order="BEFORE">
+      SELECT ID_GENERATOR_SQ.nextval FROM DUAL
+    </selectKey><![CDATA[
+    INSERT INTO USER (ID, USERNAME, EMAIL, NAME, DEPT, GRADE, LOCK, HIRED, CREATOR, UPDATER)
+    VALUES (
+        #{id},
+        #{username},
+        #{email},
+        #{name},
+        #{dept},
+        #{grade},
+        #{lock},
+        #{hired},
+        #{_.username},
+        #{_.username}
+    )
+    ]]>
+  </insert>
+
+  <update id="update"><![CDATA[
+    UPDATE USR
+    SET USERNAME = #{username},
+        TEAM_ID  = #{teamId},
+        EMAIL    = #{email},
+        NAME     = #{name},
+        DEPT     = #{dept},
+        GRADE    = #{grade},
+        USE     = #{use},
+        HIRED    = #{hired},
+        UPDATER  = #{_.username},
+        UPDATED  = SYSDATE
+    WHERE ID = #{id}
+    ]]></update>
+
+  <update id="updatePassword"><![CDATA[
+    UPDATE USR
+    SET PASSWORD         = #{password},
+        PASSWORD_EXPIRED = DATEADD('MONTH', 3, CURRENT_DATE),
+        UPDATER          = #{_.username},
+        UPDATED          = CURRENT_TIMESTAMP
+    WHERE ID = #{id}
+    ]]></update>
+</mapper>

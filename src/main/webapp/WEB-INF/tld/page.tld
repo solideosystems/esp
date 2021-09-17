@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+  version="2.1">
+
+  <description>ESP Page concrete library</description>
+  <display-name>ESP Page</display-name>
+  <tlib-version>1.1</tlib-version>
+  <short-name>page</short-name>
+  <uri>esp://taglib/page</uri>
+
+  <tag>
+    <name>base</name>
+    <tag-class>esp.taglib.page.BaseTag</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <name>title</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>grid</name>
+    <tag-class>esp.taglib.page.GridTag</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <name>title</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>article</name>
+    <tag-class>esp.taglib.page.ArticleTag</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <name>title</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+</taglib>

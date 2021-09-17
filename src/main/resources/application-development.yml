@@ -1,0 +1,33 @@
+spring:
+
+  sql:
+    init:
+      mode: embedded # 최초 실행할 때 "always" 로 설정해서 schema 를 생성
+
+  datasource:
+    driver-class-name: "org.h2.Driver"
+    url: "jdbc:h2:./esp;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE;MODE=Oracle"
+    username: "sa"
+    password: "11"
+
+  mvc:
+    view:
+      prefix: "/WEB-INF/pages/"
+      suffix: ".jsp"
+
+
+file.storage:
+  path: ./file-storage
+
+project:
+  dir: "D:/workspaces/com.solideos/esp-admin"
+
+
+logging:
+  level:
+    org.hibernate.type: TRACE
+    org.hibernate.type.BasicTypeRegistry: WARN
+
+
+server.port: 8088
+
