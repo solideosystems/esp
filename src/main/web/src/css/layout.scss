@@ -1,0 +1,17 @@
+.q-layout__section--marginal {
+  background-color: #484848
+}
+
+.q-page {
+  background-color: rgba(0, 0, 0, .05);
+  padding: 1rem;
+
+  header {
+    background-color: #FFF;
+    align-items: center;
+    border-radius: .25rem;
+    display: flex;
+    padding: 1rem;
+    margin: .25rem .5rem;
+  }
+}

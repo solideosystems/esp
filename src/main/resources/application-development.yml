@@ -27,7 +27,3 @@ logging:
   level:
     org.hibernate.type: TRACE
     org.hibernate.type.BasicTypeRegistry: WARN
-
-
-server.port: 8088
-
