@@ -12,14 +12,21 @@
 
                 <ul id="메뉴"></ul>
             </div>
-            <div>
-                <div class="app-button float-right">
-                    <button id="권한저장_버튼" class="btn btn-default">저장</button>
+            <div class="app--vertical">
+                <div>
+                    <div class="app-button float-right">
+                        <button id="권한저장_버튼" class="btn btn-default">저장</button>
+                    </div>
+
+                    <h4>메뉴에 접근 가능한 권한</h4>
+
+                    <ul id="권한" class="authority namu"></ul>
                 </div>
+                <div>
+                    <h4>메뉴에 포함된 기능</h4>
 
-                <h4>메뉴에 접근 가능한 권한</h4>
-
-                <ul id="권한" class="authority namu"></ul>
+                    none empty
+                </div>
             </div>
         </section>
 
@@ -68,7 +75,20 @@
       var selected = null,
           authorities = [],
           ordered = {},
-          ul = $('#메뉴')
+          ul = $('#메뉴').on('namu:drop', function (e) {
+            var li = $(e.target),
+                menu = li.data('menu'),
+                pid = (li.parent('ul').parent('li').data('menu') || {id: 0}).id
+
+            if (menu.pid !== pid) {
+              menu.pid = pid
+              _ordering(li)
+            } else if (li.index() !== menu.order) {
+              _ordering(li)
+            }
+          }).on('namu:move', function (e) {
+            _ordering(e.target)
+          })
 
       $.req.get('/_authority?id=0')
       .done(function (response) {
@@ -79,7 +99,7 @@
       $.req.get('/_menu?id=0')
       .done(function (response) {
         _branches(response, ul)
-        namu(ul[0]).drop(_menuDropEvent)
+        namu(ul.get(0))
       })
     </script>
     <script defer title="이벤트">
@@ -147,27 +167,10 @@
         $('.fn__bbs').toggle('00' === this.value)
         .next().attr('pattern', '00' === this.value ? '' : '[\w-]*')
 
-
         $('.fn__popup').toggle('01' === this.value)
       })
     </script>
     <script defer title="기능">
-      function _menuDropEvent(e) {
-        var li = $(e.target),
-            menu = li.data('menu'),
-            pid = (li.parent('ul').parent('li').data('menu') || {id: 0}).id
-
-        if (menu.pid !== pid) {
-          menu.pid = pid
-          ordered[menu.id] = menu
-        }
-
-        _ordering(e.target)
-
-        // 옮기기 이전에 있던 요소들 순서 맞추기
-        e.target.family && e.target.family.next && _ordering(e.target.family.next)
-      }
-
       function _branches(item, ul) {
         var li = $('<li draggable="true"><a>' + item.name + '</a>'),
             _ul = $('<ul/>')
@@ -183,8 +186,8 @@
       }
 
       function _roleBranches(item, ul) {
-        var _ul = $('<ul/>'),
-            li = $('<li data-role=' + item.role + '>' +
+        var _ul = $('<ul class="namu__branch"/>'),
+            li = $('<li data-role=' + item.role + ' class="namu__leaf">' +
                 '<a title="' + item.description + '">' + item.role +
                 '<span class="material-icons"></span></a></li>').append(_ul)
 
@@ -198,17 +201,12 @@
         return li
       }
 
-      function _ordering(el) {
-        var li = $(el)
-        do {
-          var menu = li.data('menu'),
-              index = li.index()
+      function _ordering(li) {
+        var _li = $(li),
+            menu = _li.data('menu')
 
-          if (menu.order !== index) {
-            menu.order = index
-            ordered[menu.id] = menu
-          }
-        } while ((li = li.next('li')).length)
+        ordered[menu.id] = $.extend(menu, {order: _li.index()})
+
       }
     </script>
 
@@ -221,7 +219,7 @@
 
       .role--selected > a .material-icons {
         font-size: 1.4rem;
-        margin: -5px 0 0 8px;
+        margin: -4px 0 0 8px;
       }
 
       .role--selected > a .material-icons::before {

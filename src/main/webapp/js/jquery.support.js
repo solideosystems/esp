@@ -642,7 +642,9 @@ $(function () {
       .remove()
     })
     .next().find('input[type=file]')
-    .on('drop', e => e.preventDefault())
+    .on('drop', function (e) {
+      e.preventDefault()
+    })
     .change(function () {
       load(this.files)
       this.value = ''

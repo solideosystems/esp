@@ -48,12 +48,29 @@
       $.req.get('/_team')
       .done(function (json) {
         var ul = $('#조직')
+        .on('namu:drop', function (e) {
+          var li = $(e.target),
+              team = li.data('team'),
+              pid = (li.parent('ul').parent('li').data('team') || {id: 0}).id
+
+          if (team.pid !== pid) {
+            team.pid = pid
+            ordered[team.id] = team
+            $('#조직구조_저장_버튼').disabled(false)
+          }
+        })
+        .on('namu:move', function (e) {
+          var li = $(e.target),
+              team = li.data('team')
+
+          ordered[team.id] = $.extend(team, {order: li.index()})
+        })
 
         json.children.forEach(function (i) {
           _branches(i, ul)
         })
 
-        namu(ul[0]).drop(_teamDropEvent)
+        namu(ul.get(0))
       })
 
       $.req.get('/_authority/team')
@@ -95,7 +112,7 @@
           $.extend(selected.team, response)
           selected.find('>a').text(response.name)
 
-          response.removal && selected.fadeOut(function() {
+          response.removal && selected.fadeOut(function () {
             this.remove()
           }).parent().parent().click()
         } else {
@@ -172,26 +189,10 @@
       })
     </script>
     <script defer title="기능">
-      function _teamDropEvent(e) {
-        var li = $(e.target),
-            team = li.data('team'),
-            pid = (li.parent('ul').parent('li').data('team') || {id: 0}).id
-
-        if (team.pid !== pid) {
-          team.pid = pid
-          ordered[team.id] = team
-          $('#조직구조_저장_버튼').disabled(false)
-        }
-
-        _ordering(e.target)
-
-        // 옮기기 이전에 있던 요소들 순서 맞추기
-        e.target.family && e.target.family.next && _ordering(e.target.family.next)
-      }
-
       function _branches(item, ul) {
-        var _ul = $('<ul/>'),
-            li = $('<li draggable="true"><a>' + item.name + '</a></li>').append(_ul)
+        var _ul = $('<ul class="namu__branch"/>'),
+            li = $('<li draggable="true" class="namu__leaf"><a>' + item.name + '</a></li>').append(
+                _ul)
             .data('team', item)
 
         $.each(item.children, function (_i, i) {
@@ -204,8 +205,8 @@
       }
 
       function _roleBranches(item, ul) {
-        var _ul = $('<ul/>'),
-            li = $('<li data-role=' + item.role + '>' +
+        var _ul = $('<ul class="namu__branch"/>'),
+            li = $('<li data-role=' + item.role + ' class="namu__leaf">' +
                 '<a title="' + item.description + '">' + item.role +
                 '<span class="material-icons"></span></a></li>').append(_ul)
 
@@ -217,19 +218,6 @@
 
         ul.append(li.data('role', item))
         return li
-      }
-
-      function _ordering(el) {
-        var li = $(el)
-        do {
-          var team = li.data('team'),
-              index = li.index()
-
-          if (team.order !== index) {
-            team.order = index
-            ordered[team.id] = team
-          }
-        } while ((li = li.next('li')).length)
       }
 
       function toList(item) {

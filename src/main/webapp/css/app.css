@@ -210,6 +210,18 @@ label[title][data-error]::after {
   overflow: auto;
   padding: 16px;
 }
+.app--column > .app--vertical {
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+}
+.app--column > .app--vertical > div {
+  background-color: #FFF;
+  border-radius: 4px;
+  margin: 0 8px 16px;
+  overflow: auto;
+  padding: 16px;
+}
 
 .app-details label[title] > input[type=checkbox] {
   height: 2rem;
@@ -418,7 +430,7 @@ label[title][data-error]::after {
 
 
 .authority ul {
-  margin-left: 1rem !important;
+  margin-left: -.375rem !important;
 }
 
 .authority a[title]::after {

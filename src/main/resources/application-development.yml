@@ -6,7 +6,7 @@ spring:
 
   datasource:
     driver-class-name: "org.h2.Driver"
-    url: "jdbc:h2:./esp;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE;MODE=Oracle"
+    url: "jdbc:h2:./esp;AUTO_SERVER=TRUE"
     username: "sa"
     password: "11"
 

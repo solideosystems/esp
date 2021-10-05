@@ -63,6 +63,10 @@
           <groupId>org.mybatis</groupId>
           <artifactId>mybatis-spring</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>javax</groupId>
+          <artifactId>javaee-api</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -93,7 +97,7 @@
     <dependency>
       <groupId>io.github.greenn-lab</groupId>
       <artifactId>ddul</artifactId>
-      <version>0.1.0-SNAPSHOT</version>
+      <version>0.1.1</version>
     </dependency>
 
     <dependency>
